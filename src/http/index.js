@@ -1,5 +1,5 @@
 
-async function fetchMarkdown(file) {
+async function fetchMd(file) {
   const url = `/markdown/${file}.md`;
   const response = await fetch(url);
   const text = await response.text();
@@ -13,9 +13,9 @@ async function fetchMarkdown(file) {
   return text;
 }
 
-async function showMarkdown(file) {
+async function getMd(file) {
   try {
-    const text = await fetchMarkdown(file);
+    const text = await fetchMd(file);
     return text;
   } catch (err) {
     console.error(`Error: ${err.message}`);
@@ -23,4 +23,4 @@ async function showMarkdown(file) {
   }
 }
 
-export default showMarkdown;
+export default getMd;

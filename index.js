@@ -6,7 +6,7 @@ import './src/assets/css/reset.css';
 
 const renderApp = () =>
     render(
-      <App file="test" />,
+      <App />,
       document.getElementById('root'),
   );
 
