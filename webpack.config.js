@@ -55,10 +55,24 @@ const config = {
               plugins: [
                 "transform-decorators-legacy",
                 "transform-runtime",
-                "babel-plugin-transform-es2015-modules-commonjs",
+                "syntax-dynamic-import",
               ]
               }
             }],
+        },
+        {
+                test: /\.md$/,
+                use: [
+                    {
+                        loader: "html-loader"
+                    },
+                    // {
+                    //     loader: "markdown-loader",
+                    //     options: {
+                    //         /* your options here */
+                    //     }
+                    // }
+                ]
         },
         {
           test: /\.css$/,

@@ -12,12 +12,11 @@ class Article extends React.Component {
     };
   }
 
-  componentDidMount() {
-    (async () => {
-      const { id } = this.props.match.params;
-      const text = await getMd(id);
-      this.setState({ text });
-    })();
+  async componentDidMount() {
+    const { id } = this.props.match.params;
+    const text = await getMd(id);
+    // const text = await import(`../../markdown/test.md`);
+    (() => { this.setState({ text }); })();
   }
 
   render() {
