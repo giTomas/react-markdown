@@ -1,28 +1,32 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import getMd from '../../http';
-import Markdown from '../markdown/';
+import requestMd from '../../http';
+// import Markdown from '../markdown/';
 
 class Article extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      text: null,
+      // text: null,
+      lazyMarkdown: null,
     };
   }
 
   async componentDidMount() {
-    const { id } = this.props.match.params;
-    const text = await getMd(id);
-    // const text = await import(`../../markdown/test.md`);
-    (() => { this.setState({ text }); })();
+    const text = await requestMd(this.props.match.params.id);
+    const { default: Markdown } = await import('../markdown/');
+    (() => {
+      this.setState({
+        lazyMarkdown: <Markdown source={text} />,
+      });
+    })();
   }
 
   render() {
-    const { text } = this.state;
+    // const { text } = this.state;
     return (
-      text ? <Markdown source={text} /> : <p>Loading...</p>
+      this.state.lazyMarkdown || <p>Loading...</p>
     );
   }
 }

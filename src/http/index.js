@@ -13,7 +13,7 @@ async function fetchMd(file) {
   return text;
 }
 
-async function getMd(file) {
+async function requestMd(file) {
   try {
     const text = await fetchMd(file);
     return text;
@@ -23,4 +23,4 @@ async function getMd(file) {
   }
 }
 
-export default getMd;
+export default requestMd;
