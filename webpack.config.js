@@ -21,7 +21,7 @@ const config = {
     historyApiFallback: true,
     contentBase: DIST,
     port: 8080,
-    inline: true,
+    // inline: true,
   },
   devtool: "source-map",
   module: {
