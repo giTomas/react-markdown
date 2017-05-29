@@ -12,10 +12,12 @@ class Article extends React.Component {
       lazyMarkdown: null,
     };
   }
-
+  // add promise all?
+  // find why can't be cobstructed srting with string literals
   async componentDidMount() {
     const text = await requestMd(this.props.match.params.id);
-    const { default: Markdown } = await import('../markdown/');
+    const mod = '../markdown/';
+    const { default: Markdown } = await import(mod);
     (() => {
       this.setState({
         lazyMarkdown: <Markdown source={text} />,
