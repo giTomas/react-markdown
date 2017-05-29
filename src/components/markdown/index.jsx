@@ -1,7 +1,36 @@
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import ReactMarkdown from 'react-markdown';
 
 // modular scale 1.333
+const show = keyframes`
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+`;
+
+const show2 = keyframes`
+  0% {
+    opacity: 0;
+  }
+  25% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+`;
+
+const move = keyframes`
+  from {
+    transform: translate3d(35px, 0px, 0px);
+  }
+  to {
+    transform: translate3d(0px, 0px, 0px);
+  }
+`;
 
 const Markdown = styled(ReactMarkdown)`
   --line-height: 1.4;
@@ -17,12 +46,17 @@ const Markdown = styled(ReactMarkdown)`
     font-size: 2.369em;
     margin-top: calc(var(--vertical-rhytm) * 2)
     margin-bottom: var(--vertical-rhytm);
+    animation:
+      ${move} ease-out 0.25s,
+      ${show} ease-out 0.25s;
   }
   & > p {
     font-size: 1em;
     line-height: var(--line-height);
     margin-bottom: var(--vertical-rhytm);
     color: SlateGrey;
+    animation:
+      ${show2} ease-out 1s;
   }
 `;
 

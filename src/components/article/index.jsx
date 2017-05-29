@@ -1,9 +1,20 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import requestMd from '../../http';
+import { bool, shape, string } from 'prop-types';
+// import requestMd from '../../http';
 // import Markdown from '../markdown/';
 
 class Article extends React.Component {
+  static propTypes = {
+    match: shape({
+      path: string,
+      url: string,
+      isExact: bool,
+      params: shape({
+        id: string,
+      }),
+    }).isRequired,
+  };
+
   constructor(props) {
     super(props);
 
@@ -12,30 +23,40 @@ class Article extends React.Component {
       lazyMarkdown: null,
     };
   }
-  // add promise all?
-  // find why can't be cobstructed srting with string literals
+
   async componentDidMount() {
-    const text = await requestMd(this.props.match.params.id);
-    const mod = '../markdown/';
-    const { default: Markdown } = await import(mod);
+    // const text = await requestMd(this.props.match.params.id);
+    const { id } = this.props.match.params;
+    // const text = await import(`../../markdown/${id}.md`);
+    // const { default: Markdown } = await import('../markdown/');
+    const [lazyText, { default: Markdown }] = await Promise.all([
+      import(`../../markdown/${id}.md`),
+      import('../markdown/'),
+    ]);
+
     (() => {
       this.setState({
-        lazyMarkdown: <Markdown source={text} />,
+        lazyMarkdown: <Markdown source={lazyText} />,
       });
     })();
   }
 
   render() {
-    // const { text } = this.state;
     return (
       this.state.lazyMarkdown || <p>Loading...</p>
     );
   }
 }
 
-Article.propTypes = {
-  // file: PropTypes.string.isRequired,
-  match: PropTypes.object.isRequired,
-};
+// Article.propTypes = {
+//   match: PropTypes.shape({
+//     path: PropTypes.string,
+//     url: PropTypes.string,
+//     isExact: PropTypes.bool,
+//     params: PropTypes.shape({
+//       id: PropTypes.string,
+//     }),
+//   }).isRequired,
+// };
 
 export default Article;

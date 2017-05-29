@@ -5,7 +5,7 @@
   "main": "index.html",
   "repository": "https://github.com/giTomas/react-markdown",
   "scripts": {
-    "start": "webpack -d && webpack-dev-server --hot",
+    "start": "webpack -d && webpack-dev-server --inline --hot",
     "build": "webpack -p",
     "test": "jest",
     "test -w": "jest --watch"

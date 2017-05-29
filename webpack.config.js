@@ -20,7 +20,8 @@ const config = {
   devServer: {
     historyApiFallback: true,
     contentBase: DIST,
-    port: 8080
+    port: 8080,
+    inline: true,
   },
   devtool: "source-map",
   module: {
